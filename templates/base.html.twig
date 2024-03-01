@@ -1,17 +1,94 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Bienvenue
+			{% endblock %}
+		</title>
+		<link rel="icon" href="{{asset('images/nx_black.png')}}">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+			<link rel="stylesheet" href="{{asset('css/base.css')}}">
+		{% endblock %}
+		<script src="{{asset('js/bootstrap.min.js')}}"></script>
+	</head>
+	<body>
+		<header>
+			{% block header %}
+				<nav class="navbar navbar-expand-lg" style="background-color: #0D334A">
+					<div class="container-fluid d-flex justify-content-evenly">
+						<a class="navbar-brand" href="/">
+							<img src="{{asset('images/nx_white.png')}}" alt="logo_site" width="60" height="60">
+						</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<ul class="navbar-nav container-fluid d-flex ">
+							<form class="d-flex container-fluid" role="search">
+								<div class="input-group align-items-center">
+									<span class="input-group-text" id="basic-addon1"><img src="{{asset('images/search_outline.png')}}" alt="search" height="24"></span>
+									<input class="flex-grow-1 form-control" type="search" placeholder="Rechercher..." aria-label="Search" aria-describedby="basic-addon1">
+								</div>
+							</form>
+							<div id="icons" class="d-flex">
+								<a class="nav-link" href="/map">
+									<img src="{{asset('images/map_outline.png')}}" alt="map" width="30" height="30">
+								</a>
+								{% if app.user == null %}
+									<a class="nav-link" href="{{ path('app_login') }}">
+										<img src="{{asset('images/user_outline.png')}}" alt="user" width="30" height="30">
+									</a>
+									<a class="nav-link" href="{{ path('app_register') }}" style="background-color:red">
+										<img src="{{asset('images/user_outline.png')}}" alt="user" width="30" height="30">
+									</a>
+								{% else %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+									<a class="nav-link" href="{{ path('app_user_index') }}">
+										<img src="{{asset('images/user_outline.png')}}" alt="user" width="30" height="30">
+									</a>
+									<a class="nav-link" href="{{ path('app_logout') }}">
+										<img src="{{asset('images/logout_icon.png')}}" alt="logout" width="30" height="30">
+									</a>
+									<a class="nav-link" href="/cart">
+										<img src="{{asset('images/cart_outline.png')}}" alt="cart" width="30" height="30">
+									</a>
+								{% endif %}
+							</div>
+						</ul>
+					</div>
+				</nav>
+			{% endblock %}
+		</header>
+		{% block body %}{% endblock %}
+		<footer>
+			{% block footer %}
+				<div class="container mt-5 row" style="background-color: #0D334A">
+					<div class="links row col">
+						<ul class="col">
+							<li>
+								<a href="">Découvrez-nous</a>
+							</li>
+							<li>
+								<a href="">Commander en ligne</a>
+							</li>
+						</ul>
+						<ul class="col">
+							<li>
+								<a href="">Acheter en boutique</a>
+							</li>
+							<li>
+								<a href="">Contactez-nous</a>
+							</li>
+						</ul>
+					</div>
+					<div class="reseaux col">
+						<img src="" alt="Instagram">
+						<img src="" alt="TikTok">
+						<img src="" alt="X">
+					</div>
+				</div>
+			{% endblock %}
+		</footer>
+	</body>
+</html></body></html>
